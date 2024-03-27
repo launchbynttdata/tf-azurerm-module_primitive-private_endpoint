@@ -37,15 +37,6 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "custom_network_interface_name" {
-  description = <<EOT
-    The custom name of the network interface attached to the private endpoint.
-    Changing this forces a new resource to be created.
-  EOT
-  type        = string
-  default     = null
-}
-
 variable "private_dns_zone_group_name" {
   description = "Specifies the Name of the Private DNS Zone Group."
   type        = string
@@ -58,9 +49,20 @@ variable "private_dns_zone_ids" {
   default     = []
 }
 
-variable "private_service_connection_name" {}
+variable "private_service_connection_name" {
+  description = "Specifies the Name of the Private Service Connection."
+  type        = string
 
-variable "is_manual_connection" {}
+}
+
+variable "is_manual_connection" {
+  description = <<EOT
+    Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource
+    to be created.
+  EOT
+  type        = bool
+  default     = false
+}
 
 variable "private_connection_resource_id" {
   description = <<EOT
@@ -98,21 +100,6 @@ variable "request_message" {
   EOT
   type        = string
   default     = ""
-}
-
-variable "ip_configuration" {
-  description = <<EOT
-    One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this
-    Private Endpoint, otherwise an address is dynamically allocated from the Subnet.
-  EOT
-  type = map(object({
-    name               = string
-    private_ip_address = string
-    subresource_name   = optional(string)
-    member_name        = optional(string)
-  }))
-
-  default = null
 }
 
 variable "tags" {

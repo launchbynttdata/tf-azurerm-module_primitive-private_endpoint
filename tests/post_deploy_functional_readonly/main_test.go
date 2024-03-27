@@ -17,19 +17,21 @@ import (
 
 	"github.com/launchbynttdata/lcaf-component-terratest/lib"
 	"github.com/launchbynttdata/lcaf-component-terratest/types"
-	testimpl "github.com/launchbynttdata/tf-azurerm-module_primitive-private_endpoint/tests/testimpl"
+	"github.com/launchbynttdata/tf-azurerm-module_primitive-private_endpoint/tests/testimpl"
 )
 
 const (
-	testConfigsExamplesFolderDefault = "../../examples"
+	testConfigsExamplesFolderDefault = "../../examples/acr-private-endpoint"
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
 func TestPrivateEndpointModule(t *testing.T) {
 
-	ctx := types.TestContext{
-		TestConfig: &testimpl.ThisTFModuleConfig{},
-	}
-	lib.RunSetupTestTeardown(t, testConfigsExamplesFolderDefault, infraTFVarFileNameDefault, ctx,
-		testimpl.TestPrivateEndpointComplete)
+	ctx := types.CreateTestContextBuilder().
+		SetTestConfig(&testimpl.ThisTFModuleConfig{}).
+		SetTestConfigFolderName(testConfigsExamplesFolderDefault).
+		SetTestConfigFileName(infraTFVarFileNameDefault).
+		Build()
+
+	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestPrivateEndpointComplete)
 }

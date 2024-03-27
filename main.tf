@@ -22,6 +22,7 @@ resource "azurerm_private_endpoint" "private_endpoint" {
     private_connection_resource_alias = var.private_connection_resource_alias
     subresource_names                 = var.subresource_names
     is_manual_connection              = var.is_manual_connection
+    request_message                   = var.is_manual_connection ? var.request_message : null
   }
 
   dynamic "private_dns_zone_group" {

@@ -1,4 +1,4 @@
-package common
+package testimpl
 
 import (
 	"testing"
@@ -11,7 +11,7 @@ import (
 func TestPrivateEndpointComplete(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestPrivateEndpoint", func(t *testing.T) {
-		privateEndpointId := terraform.Output(t, ctx.TerratestTerraformOptions, "private_endpoint_id")
+		privateEndpointId := terraform.Output(t, ctx.TerratestTerraformOptions(), "private_endpoint_id")
 		assert.NotEmpty(t, privateEndpointId, "Private endpoint ID must not be empty")
 	})
 }
