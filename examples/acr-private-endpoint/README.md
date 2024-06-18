@@ -52,6 +52,7 @@ No resources.
 | <a name="output_private_endpoint_id"></a> [private\_endpoint\_id](#output\_private\_endpoint\_id) | n/a |
 | <a name="output_acr_server_name"></a> [acr\_server\_name](#output\_acr\_server\_name) | n/a |
 | <a name="output_acr_id"></a> [acr\_id](#output\_acr\_id) | n/a |
+| <a name="output_network_interface_ids"></a> [network\_interface\_ids](#output\_network\_interface\_ids) | n/a |
 | <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | n/a |
 | <a name="output_vnet_id"></a> [vnet\_id](#output\_vnet\_id) | n/a |
 | <a name="output_subnet_ids"></a> [subnet\_ids](#output\_subnet\_ids) | n/a |
