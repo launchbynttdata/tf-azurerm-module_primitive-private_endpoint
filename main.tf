@@ -33,5 +33,5 @@ resource "azurerm_private_endpoint" "private_endpoint" {
     }
   }
 
-  tags = var.tags
+  tags = local.tags
 }
