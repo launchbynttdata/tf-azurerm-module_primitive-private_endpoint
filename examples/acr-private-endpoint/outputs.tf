@@ -22,6 +22,10 @@ output "acr_id" {
   value = module.acr.container_registry_id
 }
 
+output "network_interface_ids" {
+  value = module.private_endpoint.network_interface_ids
+}
+
 output "resource_group_id" {
   value = module.resource_group.id
 }
