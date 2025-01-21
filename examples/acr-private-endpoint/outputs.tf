@@ -34,9 +34,9 @@ output "vnet_id" {
   value = module.vnet.vnet_id
 }
 
-output "subnet_ids" {
-  value = module.vnet.vnet_subnets
-}
+# output "subnet_ids" {
+#   value = module.vnet.vnet_subnets
+# }
 
 output "vnet_link_id" {
   value = module.vnet_link.id

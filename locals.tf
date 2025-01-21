@@ -12,7 +12,7 @@
 
 locals {
   default_tags = {
-    provisioner = "terraform"
+    provisioner   = "terraform"
     resource_name = var.endpoint_name
   }
 

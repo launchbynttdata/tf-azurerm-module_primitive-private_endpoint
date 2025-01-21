@@ -12,7 +12,7 @@
 
 module "resource_names" {
   source  = "terraform.registry.launch.nttdata.com/module_library/resource_name/launch"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   for_each = var.resource_names_map
 
@@ -27,7 +27,7 @@ module "resource_names" {
 
 module "resource_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   name     = module.resource_names["rg"].standard
   location = var.region
@@ -38,26 +38,20 @@ module "resource_group" {
 
 module "vnet" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/virtual_network/azurerm"
-  version = "~> 1.0"
+  version = "~> 3.1"
 
-  vnet_location                                         = var.region
-  resource_group_name                                   = module.resource_group.name
-  vnet_name                                             = module.resource_names["vnet"].standard
-  address_space                                         = var.address_space
-  subnet_names                                          = var.subnet_names
-  subnet_prefixes                                       = var.subnet_prefixes
-  bgp_community                                         = null
-  ddos_protection_plan                                  = null
-  dns_servers                                           = []
-  nsg_ids                                               = {}
-  route_tables_ids                                      = {}
-  subnet_delegation                                     = {}
-  subnet_enforce_private_link_endpoint_network_policies = {}
-  subnet_enforce_private_link_service_network_policies  = {}
-  subnet_service_endpoints                              = {}
-  tracing_tags_enabled                                  = false
-  tracing_tags_prefix                                   = ""
-  use_for_each                                          = true
+  vnet_location       = var.region
+  resource_group_name = module.resource_group.name
+  vnet_name           = module.resource_names["vnet"].standard
+  address_space       = var.address_space
+  subnets = {
+    (var.subnet_names[0]) = {
+      prefix = var.subnet_prefixes[0]
+    }
+  }
+  bgp_community        = null
+  ddos_protection_plan = null
+  dns_servers          = []
 
   tags = merge(var.tags, { resource_name = module.resource_names["vnet"].standard })
 
@@ -66,7 +60,7 @@ module "vnet" {
 
 module "acr" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/container_registry/azurerm"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   container_registry_name       = module.resource_names["acr"].lower_case_without_any_separators
   location                      = var.region
@@ -116,7 +110,7 @@ module "private_endpoint" {
   private_service_connection_name = "pvt-conn-acr"
   private_connection_resource_id  = module.acr.container_registry_id
   subresource_names               = ["registry"]
-  subnet_id                       = module.vnet.vnet_subnets[0]
+  subnet_id                       = module.vnet.subnet_map[var.subnet_names[0]].id
   private_dns_zone_ids            = [module.private_dns_zone.id]
   private_dns_zone_group_name     = "test-group"
 
