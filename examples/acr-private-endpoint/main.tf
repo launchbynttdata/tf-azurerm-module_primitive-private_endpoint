@@ -27,7 +27,7 @@ module "resource_names" {
 
 module "resource_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
-  version = "~> 1.1"
+  version = "~> 1.2"
 
   name     = module.resource_names["rg"].standard
   location = var.region
