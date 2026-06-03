@@ -62,7 +62,7 @@ module "acr" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/container_registry/azurerm"
   version = "~> 2.0"
 
-  container_registry_name       = module.resource_names["acr"].lower_case_without_any_separators
+  container_registry_name       = module.resource_names["acr"].minimal_random_suffix_without_any_separators
   location                      = var.region
   resource_group_name           = module.resource_group.name
   sku                           = "Premium"
