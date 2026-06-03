@@ -29,7 +29,7 @@ module "resource_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
   version = "~> 1.2"
 
-  name     = module.resource_names["rg"].standard
+  name     = module.resource_names["rg"].minimal_random_suffix
   location = var.region
 
   tags = merge(var.tags, { resource_name = module.resource_names["rg"].standard })
