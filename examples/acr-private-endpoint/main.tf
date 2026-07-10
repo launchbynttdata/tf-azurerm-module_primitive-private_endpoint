@@ -38,7 +38,7 @@ module "resource_group" {
 
 module "vnet" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/virtual_network/azurerm"
-  version = "~> 3.1"
+  version = "~> 3.2"
 
   vnet_location       = var.region
   resource_group_name = module.resource_group.name
@@ -60,7 +60,7 @@ module "vnet" {
 
 module "acr" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/container_registry/azurerm"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   container_registry_name       = module.resource_names["acr"].minimal_random_suffix_without_any_separators
   location                      = var.region
@@ -77,7 +77,7 @@ module "acr" {
 
 module "private_dns_zone" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/private_dns_zone/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   zone_name           = "privatelink.azurecr.io"
   resource_group_name = module.resource_group.name
@@ -89,7 +89,7 @@ module "private_dns_zone" {
 
 module "vnet_link" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/private_dns_vnet_link/azurerm"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   link_name             = "acr-pe-link"
   private_dns_zone_name = module.private_dns_zone.zone_name
