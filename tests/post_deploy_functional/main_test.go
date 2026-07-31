@@ -33,5 +33,5 @@ func TestPrivateEndpointModule(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		Build()
 
-	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestPrivateEndpointComplete)
+	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestComposablePrivateEndpointComplete)
 }
