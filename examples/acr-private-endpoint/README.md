@@ -44,7 +44,7 @@ No resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+|------|---------|
 | <a name="output_acr_id"></a> [acr\_id](#output\_acr\_id) | n/a |
 | <a name="output_acr_server_name"></a> [acr\_server\_name](#output\_acr\_server\_name) | n/a |
 | <a name="output_network_interface_ids"></a> [network\_interface\_ids](#output\_network\_interface\_ids) | n/a |
