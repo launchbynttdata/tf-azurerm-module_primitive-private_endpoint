@@ -39,7 +39,14 @@ go_files="$(find "$readonly_dir" -name '*.go' -type f 2>/dev/null || true)"
 # Comment-stripped, newline-flattened view of the readonly Go sources, so the
 # checks below are robust to multiline calls and to identifiers appearing in
 # comments. (Strips // line comments; block comments are not handled.)
-flat="$(cat $go_files | sed -e 's://.*$::' | tr '\n' ' ')"
+flat=""
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  flat+="$(sed -e 's://.*$::' "$f")"$'\n'
+done <<EOF
+$go_files
+EOF
+flat="$(printf '%s' "$flat" | tr '\n' ' ')"
 
 # 1. Wrong runner: the destructive runner must not be *called* in the readonly suite.
 if printf '%s' "$flat" | grep -Eq 'RunSetupTestTeardown[[:space:]]*\('; then

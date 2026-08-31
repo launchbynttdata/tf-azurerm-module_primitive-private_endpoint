@@ -1,7 +1,6 @@
 package testimpl
 
 import (
-	"context"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -12,7 +11,7 @@ import (
 func TestComposablePrivateEndpointComplete(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestPrivateEndpoint", func(t *testing.T) {
-		privateEndpointId := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "private_endpoint_id")
+		privateEndpointId := terraform.OutputContext(t, t.Context(), ctx.TerratestTerraformOptions(), "private_endpoint_id")
 		assert.NotEmpty(t, privateEndpointId, "Private endpoint ID must not be empty")
 	})
 }
