@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPrivateEndpointComplete(t *testing.T, ctx types.TestContext) {
+func TestComposablePrivateEndpointComplete(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestPrivateEndpoint", func(t *testing.T) {
-		privateEndpointId := terraform.Output(t, ctx.TerratestTerraformOptions(), "private_endpoint_id")
+		privateEndpointId := terraform.OutputContext(t, t.Context(), ctx.TerratestTerraformOptions(), "private_endpoint_id")
 		assert.NotEmpty(t, privateEndpointId, "Private endpoint ID must not be empty")
 	})
 }
