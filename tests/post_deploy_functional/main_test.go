@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	testConfigsExamplesFolderDefault = "../../examples"
+	testConfigsExamplesFolderDefault = "../../examples/acr-private-endpoint"
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
